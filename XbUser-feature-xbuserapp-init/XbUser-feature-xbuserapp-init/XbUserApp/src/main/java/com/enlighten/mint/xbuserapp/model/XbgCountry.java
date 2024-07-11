@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 public class XbgCountry {
 
@@ -32,6 +29,68 @@ public class XbgCountry {
 
         @Column(name = "CountryCode3",length = 6,nullable = false)
         private String countryCode3;
+
+
+        //Default Constructor
+    public XbgCountry()
+    {
+
+    }
+
+    //ALl Args Constructor
+
+
+    public XbgCountry(Integer countryId, String countryCode3, String countryCode2, String countryName, Integer languageId) {
+        this.countryId = countryId;
+        this.countryCode3 = countryCode3;
+        this.countryCode2 = countryCode2;
+        this.countryName = countryName;
+        this.languageId = languageId;
+    }
+
+
+    //Getters and Setters
+
+
+    public Integer getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
+
+    public Integer getLanguageId() {
+        return languageId;
+    }
+
+    public void setLanguageId(Integer languageId) {
+        this.languageId = languageId;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getCountryCode2() {
+        return countryCode2;
+    }
+
+    public void setCountryCode2(String countryCode2) {
+        this.countryCode2 = countryCode2;
+    }
+
+    public String getCountryCode3() {
+        return countryCode3;
+    }
+
+    public void setCountryCode3(String countryCode3) {
+        this.countryCode3 = countryCode3;
+    }
 
     @Override
     public String toString() {

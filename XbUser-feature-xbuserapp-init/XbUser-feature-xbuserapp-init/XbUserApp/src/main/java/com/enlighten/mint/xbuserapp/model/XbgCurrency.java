@@ -1,15 +1,10 @@
 package com.enlighten.mint.xbuserapp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
-//@Table(name="Xbg_Currency")
+@Table(name="Xbg_Currency")
 public class XbgCurrency {
 
 
@@ -33,70 +28,61 @@ public class XbgCurrency {
 
 
 
+        // Default constructor
+        public XbgCurrency() {}
 
-
-
-
-//
-//        @ManyToOne
-//        @JoinColumn(name="whiteLabelID")
-//        private XbmwhiteLabel xbmwhiteLabels;
-
-
-
-//        // Default constructor
-//        public XbgCurrency() {}
-//
 //        // Constructor
-//        public XbgCurrency(Short currencyID, Short languageID, String currencyName, String currencyCode2, String currencyCode3) {
-//            this.currencyID = currencyID;
-//            this.languageID = languageID;
-//            this.currencyName = currencyName;
-//            this.currencyCode2 = currencyCode2;
-//            this.currencyCode3 = currencyCode3;
-//        }
-//
-//        // Getters and setters
-//        public int getCurrencyID() {
-//            return currencyID;
-//        }
-//
-//        public void setCurrencyID(Integer currencyID) {
-//            this.currencyID = currencyID;
-//        }
-//
-//        public int getLanguageID() {
-//            return languageID;
-//        }
-//
-//        public void setLanguageID(Integer languageID) {
-//            this.languageID = languageID;
-//        }
-//
-//        public String getCurrencyName() {
-//            return currencyName;
-//        }
-//
-//        public void setCurrencyName(String currencyName) {
-//            this.currencyName = currencyName;
-//        }
-//
-//        public String getCurrencyCode2() {
-//            return currencyCode2;
-//        }
-//
-//        public void setCurrencyCode2(String currencyCode2) {
-//            this.currencyCode2 = currencyCode2;
-//        }
-//
-//        public String getCurrencyCode3() {
-//            return currencyCode3;
-//        }
-//
-//        public void setCurrencyCode3(String currencyCode3) {
-//            this.currencyCode3 = currencyCode3;
-//        }
-//
+        public XbgCurrency(Integer currencyID, Integer languageID, String currencyName, String currencyCode2, String currencyCode3) {
+            this.currencyID = currencyID;
+            this.languageID = languageID;
+            this.currencyName = currencyName;
+            this.currencyCode2 = currencyCode2;
+            this.currencyCode3 = currencyCode3;
+        }
+
+        // Getters and setters
+
+        public Integer getCurrencyID() {
+                return currencyID;
+        }
+
+        public void setCurrencyID(Integer currencyID) {
+                this.currencyID = currencyID;
+        }
+
+        public Integer getLanguageID() {
+                return languageID;
+        }
+
+        public void setLanguageID(Integer languageID) {
+                this.languageID = languageID;
+        }
+
+        public String getCurrencyName() {
+                return currencyName;
+        }
+
+        public void setCurrencyName(String currencyName) {
+                this.currencyName = currencyName;
+        }
+
+        public String getCurrencyCode2() {
+                return currencyCode2;
+        }
+
+        public void setCurrencyCode2(String currencyCode2) {
+                this.currencyCode2 = currencyCode2;
+        }
+
+        public String getCurrencyCode3() {
+                return currencyCode3;
+        }
+
+        public void setCurrencyCode3(String currencyCode3) {
+                this.currencyCode3 = currencyCode3;
+        }
+
+
 //
 
         @Override

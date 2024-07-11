@@ -18,18 +18,24 @@ public class XbgCountryService {
         @Autowired
         private XbgCountryRepository xbgCountryRepository;
 
-    public List<XbgCountry> getAllXbgCountries() {
-        return xbgCountryRepository.findAll();
-    }
 
 
-    public XbgCountry getXbmCountryById(Integer id) {
-        return xbgCountryRepository.findById(id)
 
-                .orElseThrow(() -> new RuntimeException("Country not found with id " + id));
-    }
+        public List<XbgCountry> getAllXbgCountries() {
+            return xbgCountryRepository.findAll();
+        }
 
-        public XbgCountry saveCountry(XbgCountry xbgCountry) {
+        public Optional<XbgCountry> getXbgCountryById(Integer id) {
+            return xbgCountryRepository.findById(id);
+        }
+
+        public XbgCountry createOrUpdateXbgCountry(XbgCountry xbgCountry) {
             return xbgCountryRepository.save(xbgCountry);
         }
-}
+
+        public void deleteXbgCountry(Integer id) {
+            xbgCountryRepository.deleteById(id);
+        }
+    }
+
+

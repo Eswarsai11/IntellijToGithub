@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class XbmWhiteLableService {
@@ -14,36 +15,26 @@ public class XbmWhiteLableService {
     @Autowired
     private XbmWhiteLabelRepository xbmWhiteLabelRepository;
 
-    // Get all white labels
-    public List<XbmwhiteLabel> getAllXbmWhiteLabels() {
-        return xbmWhiteLabelRepository.findAll();
-    }
 
-    // Create a new white label
-    public XbmwhiteLabel createXbmWhiteLabel( XbmwhiteLabel xbmwhiteLabel) {
-        return xbmWhiteLabelRepository.save(xbmwhiteLabel);
-    }
 
-    // Get a single white label by ID
 
-    public XbmwhiteLabel getXbmWhiteLabelById( Integer id) {
-        return xbmWhiteLabelRepository.findById(id)
+        public List<XbmwhiteLabel> getAllXbmWhiteLabels() {
+            return xbmWhiteLabelRepository.findAll();
+        }
 
-                .orElseThrow(() -> new RuntimeException("WhiteLabel not found with id " + id));
-    }
+        public Optional<XbmwhiteLabel> getXbmWhiteLabelById(Integer id) {
+            return xbmWhiteLabelRepository.findById(id);
+        }
 
-    // Update a white label
+        public XbmwhiteLabel createOrUpdateXbmWhiteLabel(XbmwhiteLabel xbmWhiteLabel) {
+            return xbmWhiteLabelRepository.save(xbmWhiteLabel);
+        }
 
-    public XbmwhiteLabel updateXbmWhiteLabel( XbmwhiteLabel xbmwhiteLabel) {
-        return xbmWhiteLabelRepository.save(xbmwhiteLabel);
+        public void deleteXbmWhiteLabel(Integer id) {
+            xbmWhiteLabelRepository.deleteById(id);
+        }
     }
 
 
-    // Delete a white label
 
-    public String deleteXbmWhiteLabel(Integer id) {
-        xbmWhiteLabelRepository.deleteById(id);
 
-        return "Deleted white label with id: " + id;
-    }
-}

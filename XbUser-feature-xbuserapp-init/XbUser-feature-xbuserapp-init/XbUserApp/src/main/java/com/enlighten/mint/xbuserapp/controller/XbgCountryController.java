@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/countries")
@@ -21,28 +22,22 @@ public class XbgCountryController {
     @Autowired
     private XbgCountryService xbgCountryService;
 
-    @PostMapping
-    public ResponseEntity<XbgCountry> createXbgContry(@RequestBody XbgCountry xbgCountry) {
-        XbgCountry xbgCountry1=xbgCountryService.saveCountry(xbgCountry);
-        return ResponseEntity.status(HttpStatus.CREATED).body(xbgCountry1);
-    }
-
     @GetMapping
-    public ResponseEntity<List<XbgCountry>> getAllXbgAvailableCountries(){
-
-        List<XbgCountry> xbgCountryList = xbgCountryService.getAllXbgCountries();
-
-        return ResponseEntity.ok(xbgCountryList);
-
+    public ResponseEntity<List<XbgCountry>> getAllXbgCountries() {
+        List<XbgCountry> xbgCountries = xbgCountryService.getAllXbgCountries();
+        return ResponseEntity.ok(xbgCountries);
     }
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity<XbgCountry> getWithXbgContryWithId(@PathVariable Integer id){
-
-        XbgCountry xbgCountry = xbgCountryService.getXbmCountryById(id);
-
-        return ResponseEntity.ok(xbgCountry);
-
+    @GetMapping("/{id}")
+    public ResponseEntity<XbgCountry> getXbgCountryById(@PathVariable Integer id) {
+        Optional<XbgCountry> xbgCountry = xbgCountryService.getXbgCountryById(id);
+        return xbgCountry.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PostMapping
+    public ResponseEntity<XbgCountry> createXbgCountry(@RequestBody XbgCountry xbgCountry) {
+        XbgCountry createdXbgCountry = xbgCountryService.createOrUpdateXbgCountry(xbgCountry);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdXbgCountry);
+    }
+
 }

@@ -1,14 +1,15 @@
 package com.enlighten.mint.xbuserapp.controller;
 
 import com.enlighten.mint.xbuserapp.model.XbgCurrency;
-import com.enlighten.mint.xbuserapp.model.XbmwhiteLabel;
+
 import com.enlighten.mint.xbuserapp.service.XbgCurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/currencies")
@@ -17,28 +18,20 @@ public class XbgCurrencyController {
     @Autowired
     private XbgCurrencyService xbgCurrencyService;
 
-    @PostMapping
-    public ResponseEntity<XbgCurrency> createXbgCurrency(@RequestBody XbgCurrency xbgCurrency) {
-         XbgCurrency xbgCurrency1=xbgCurrencyService.saveXbgCurrency(xbgCurrency);
-         return ResponseEntity.status(HttpStatus.CREATED).body(xbgCurrency1);
-    }
-
     @GetMapping
-    public ResponseEntity<List<XbgCurrency>> getAllXbgCurrencies(){
-
-        List<XbgCurrency> xbgCurrencyList = xbgCurrencyService.getAllCurrency();
-
-        return ResponseEntity.ok(xbgCurrencyList);
-
+    public List<XbgCurrency> getAllCurrencies() {
+        return xbgCurrencyService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<XbgCurrency> getCurrencyById(@PathVariable Integer id) {
+        Optional<XbgCurrency> xbgcurrency = xbgCurrencyService.findById(id);
+        return xbgcurrency.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<XbgCurrency> getWithXbgCurrencyId(@PathVariable Integer id){
-
-        XbgCurrency xbgCurrency = xbgCurrencyService.getXbgCurrencyById(id);
-
-        return ResponseEntity.ok(xbgCurrency);
-
+    @PostMapping
+    public XbgCurrency createCurrency(@RequestBody XbgCurrency xbgcurrency) {
+        return xbgCurrencyService.save(xbgcurrency);
     }
 }
